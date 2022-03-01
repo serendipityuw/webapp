@@ -1,34 +1,57 @@
 import "./AccountPage.css";
-import { child, get, getDatabase, ref } from "firebase/database";
+import { child, get, getDatabase, ref, set } from "firebase/database";
 import { useEffect, useState } from "react";
 import { Button, Col, Form, FormGroup, Input, Label } from "reactstrap";
 import * as Constants from "../constants";
+import CenterSpinner from "./CenterSpinner";
+
 
 function AccountPage(props) {
     const [user, setUser] = useState(props.user);
     const [userData, setUserData] = useState(undefined);
+    const [loading, setLoading] = useState(false);
 
-    const databaseRef = ref(getDatabase());
-
-    const getUserData = () => {
-        get(child(databaseRef, `${Constants.USERS_ENDPOINT}${user.uid}`)).then((snapshot) => {
-            if (snapshot.exists()) {
-                setUserData(snapshot.val());
-                console.log(snapshot.val());
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
+    const database = getDatabase();
 
     useEffect(() => {
         getUserData();
     }, [props.user]);
 
-    return (
+    const getUserData = () => {
+        get(child(ref(database), `${Constants.USERS_ENDPOINT}${user.uid}`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                setUserData(snapshot.val());
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    };
+
+    const updateUserData = () => {
+        console.log(userData);
+        if (userData) {
+            set(ref(database, Constants.USERS_ENDPOINT + user.uid), userData).finally(() => {
+                setLoading(false);
+            });
+        }
+    }
+    
+    const handleSubmitForm = (event) => {
+        event.preventDefault();
+        setLoading(true);
+        console.log(event.target["highSchool"].value);
+        const newUserData = userData;
+        newUserData.highSchool = event.target["highSchool"].value;
+        setUserData(newUserData);
+        updateUserData()
+    };
+
+    
+
+    return (loading) ? <CenterSpinner /> : (
         <section id="account">
             <div className="container">
-                <Form>
+                <Form onSubmit={handleSubmitForm}>
                     <FormGroup row>
                     <Label for="userEmail" sm={2}>Email</Label>
                     <Col sm={10}>
@@ -42,17 +65,24 @@ function AccountPage(props) {
                         <Input type="text" name="name" id="userName" readOnly value={userData ? userData.name: ""}/>
                     </Col>
                     </FormGroup>
+                    
+                    <FormGroup row>
+                    <Label for="accountType" sm={2}>Account Type</Label>
+                    <Col sm={10}>
+                        <Input type="text" name="accountType" id="accountType" readOnly value={userData ? userData.accountType: ""}/>
+                    </Col>
+                    </FormGroup>
 
                     <FormGroup row>
                     <Label for="userHighSchool" sm={2}>High School</Label>
                     <Col sm={10}>
-                        <Input type="text" name="name" id="userHighSchool" defaultValue={userData ? userData.highSchool: ""}/>
+                        <Input type="text" name="highSchool" id="userHighSchool" defaultValue={userData ? userData.highSchool: ""}/>
                     </Col>
                     </FormGroup>
                     
                     <FormGroup check row>
                     <Col sm={{ size: 10, offset: 2 }}>
-                        <Button>Submit</Button>
+                        <Button type="submit" color="primary">Submit</Button>
                     </Col>
                     </FormGroup>
                 </Form>
