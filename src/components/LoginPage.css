@@ -1,0 +1,14 @@
+#login {
+    min-height: 80vh;
+    margin-bottom: 1em;
+    background-color: var(--purple-pastel);
+}
+
+.loginHeading {
+    text-align: center;
+}
+
+.loginCard {
+    min-width: 420px;
+    border-radius: 10px;
+}

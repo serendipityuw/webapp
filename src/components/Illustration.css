@@ -1,0 +1,11 @@
+.illustration {
+    padding: 1rem;
+    width: 50vw;
+}
+
+/* Medium */
+@media (min-width: 768px) {
+    .illustration {
+        width: 400px;
+    }
+}
