@@ -4,6 +4,7 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import * as Constants from './constants';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -12,6 +13,7 @@ import { initializeApp } from "firebase/app";
 const firebaseConfig = {
   apiKey: "AIzaSyBGP9fkPk1EfT-bl8O2BqJ627Hy6zYqPwo",
   authDomain: "serendipity-2f854.firebaseapp.com",
+  databaseURL: Constants.BASE_URL,
   projectId: "serendipity-2f854",
   storageBucket: "serendipity-2f854.appspot.com",
   messagingSenderId: "305536146214",
