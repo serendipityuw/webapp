@@ -5,6 +5,8 @@ import './App.css';
 import SignInPage from './components/SignInPage';
 import Layout from './components/Layout';
 import TasksPage from './components/TasksPage';
+import HistoryPage from './components/HistoryPage';
+import AccountPage from './components/AccountPage';
 import RequireAuth from './components/RequireAuth';
 import * as Constants from './constants';
 import { useState } from 'react';
@@ -25,6 +27,8 @@ function App() {
           <Route path={Constants.SIGNIN_PATH} element={ <SignInPage user={user} /> } />
           <Route path={Constants.HOME_PATH} element={ <RequireAuth user={user}><HomePage user={user} /></RequireAuth> } />
           <Route path={Constants.TASKS_PATH} element={ <RequireAuth user={user}><TasksPage user={user} /></RequireAuth> } />
+          <Route path={Constants.HISTORY_PATH} element={ <RequireAuth user={user}><HistoryPage user={user} /></RequireAuth> } />
+          <Route path={Constants.ACCOUNT_PATH} element={ <RequireAuth user={user}><AccountPage user={user} /></RequireAuth> } />
         </Route>
       </Routes>
     </BrowserRouter>

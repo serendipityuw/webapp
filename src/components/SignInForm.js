@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Card, CardBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import { browserLocalPersistence, createUserWithEmailAndPassword, getAuth, setPersistence, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as Constants from '../constants';
 
 function SignInForm() {
@@ -9,10 +9,11 @@ function SignInForm() {
 
     const auth = getAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         if (auth.currentUser) {
-            navigate(Constants.HOME_PATH);
+            navigate(location.state.from);
         }
     });
     
