@@ -4,16 +4,28 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import SignInPage from './components/SignInPage';
 import Layout from './components/Layout';
+import TasksPage from './components/TasksPage';
+import RequireAuth from './components/RequireAuth';
+import * as Constants from './constants';
+import { useState } from 'react';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 function App() {
+  const auth = getAuth();
+  const [user, setUser] = useState(undefined);
+
+  onAuthStateChanged(auth, (user) => {
+    setUser(user);
+  });
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/signin" element={<SignInPage />} />
-          <Route path="/home" element={<HomePage />} />
+        <Route element={<Layout />}>
+          <Route path={Constants.SIGNIN_PATH} element={ <SignInPage user={user} /> } />
+          <Route path={Constants.HOME_PATH} element={ <RequireAuth user={user}><HomePage user={user} /></RequireAuth> } />
+          <Route path={Constants.TASKS_PATH} element={ <RequireAuth user={user}><TasksPage user={user} /></RequireAuth> } />
         </Route>
-        
       </Routes>
     </BrowserRouter>
   );

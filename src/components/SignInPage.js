@@ -3,8 +3,7 @@ import SignInForm from './SignInForm';
 import Illustration from './Illustration';
 import * as Constants from '../constants';
 
-
-function SignInPage() {
+function SignInPage(props) {
     return (
         <section id="login">
             <div className="container">

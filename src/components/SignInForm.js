@@ -1,13 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Card, CardBody, Form, FormGroup, Label, Input } from 'reactstrap';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { browserLocalPersistence, createUserWithEmailAndPassword, getAuth, setPersistence, signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import * as Constants from '../constants';
 
 function SignInForm() {
     const [createAccount, setCreateAccount] = useState(false);
 
     const auth = getAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (auth.currentUser) {
+            navigate(Constants.HOME_PATH);
+        }
+    });
     
     const toggleCreateAcount = (event) => {
         event.preventDefault();
@@ -26,7 +33,7 @@ function SignInForm() {
             createUserWithEmailAndPassword(auth, email, pass).then(credentials => {
                 let user = credentials.user;
                 console.log(user);
-                navigate('/home');
+                navigate(Constants.HOME_PATH);
             })
             .catch(error => {
                 console.log(error.message);
@@ -38,14 +45,17 @@ function SignInForm() {
         event.preventDefault();
         const email = event.target["email"].value;
         const pass = event.target["password"].value;
-        signInWithEmailAndPassword(auth, email, pass).then(credentials => {
-            let user = credentials.user;
-            console.log(user);
-            navigate('/home');
-        })
-        .catch(error => {
+        setPersistence(auth, browserLocalPersistence).then(() => {
+            signInWithEmailAndPassword(auth, email, pass).then(credentials => {
+                let user = credentials.user;
+                console.log(user);
+                navigate(Constants.HOME_PATH);
+            });
+        }).catch(error => {
             console.log(error.message);
         });
+        
+       
     }
 
     if (createAccount) {
