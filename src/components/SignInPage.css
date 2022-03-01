@@ -12,3 +12,7 @@
     min-width: 420px;
     border-radius: 10px;
 }
+
+.btn {
+    margin-right: 1rem;
+}

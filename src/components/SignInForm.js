@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { Button, Card, CardBody, Form, FormGroup, Label, Input } from 'reactstrap';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 function SignInForm() {
     const [createAccount, setCreateAccount] = useState(false);
+
+    const auth = getAuth();
+    const navigate = useNavigate();
     
     const toggleCreateAcount = (event) => {
         event.preventDefault();
@@ -19,9 +23,10 @@ function SignInForm() {
         if (pass !== confirmPass) {
 
         } else {
-            createUserWithEmailAndPassword(email, pass).then(credentials => {
+            createUserWithEmailAndPassword(auth, email, pass).then(credentials => {
                 let user = credentials.user;
                 console.log(user);
+                navigate('/home');
             })
             .catch(error => {
                 console.log(error.message);
@@ -33,7 +38,14 @@ function SignInForm() {
         event.preventDefault();
         const email = event.target["email"].value;
         const pass = event.target["password"].value;
-        signInWithEmailAndPassword(email, pass).catch(err => console.log(err));
+        signInWithEmailAndPassword(auth, email, pass).then(credentials => {
+            let user = credentials.user;
+            console.log(user);
+            navigate('/home');
+        })
+        .catch(error => {
+            console.log(error.message);
+        });
     }
 
     if (createAccount) {
