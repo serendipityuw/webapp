@@ -1,3 +1,13 @@
 .task-card {
     margin: 1rem;
 }
+
+.claimButton, .claimButton:hover, .claimButton:focus {
+    background-color: var(--purple-primary);
+    border: none ;
+    font-weight: bold;
+}
+
+.creatorBadge {
+    font-size: 18px;
+}
