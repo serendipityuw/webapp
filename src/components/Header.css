@@ -1,6 +1,7 @@
 .nav-link {
     margin: 0 8px;
     font-weight: bold;
+    color: white !important;
     border-bottom: 5px solid white;
 }
 
