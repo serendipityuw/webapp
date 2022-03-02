@@ -11,8 +11,8 @@ function Task(props) {
                 <CardHeader><Badge>Category 1</Badge> <Badge>Category 2</Badge></CardHeader>
                 <CardBody>
                     <CardTitle tag="h4">{props.task.name}</CardTitle>
-                    <CardText>{props.task.description}</CardText>
-                    <CardText>Estimated Hours: {props.task.hours} Hours</CardText>
+                    <CardText><span className='fieldName'>Description: </span>{props.task.description}</CardText>
+                    <CardText><span className='fieldName'>Estimated Hours: </span>{props.task.hours} Hours</CardText>
                     <Button className='claimButton'>Claim</Button>
                 </CardBody>
                 <CardFooter>Created By: <Badge tag="h5" className='creatorBadge'>John Doe</Badge></CardFooter>

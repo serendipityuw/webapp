@@ -2,6 +2,10 @@
     margin: 1rem;
 }
 
+.fieldName {
+    font-weight: bold;
+}
+
 .claimButton, .claimButton:hover, .claimButton:focus {
     background-color: var(--purple-primary);
     border: none ;
