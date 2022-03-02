@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import "./AccountPage.css";
 import { child, get, getDatabase, ref, set } from "firebase/database";
 import { useEffect, useState } from "react";

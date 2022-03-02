@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { child, get, getDatabase, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import * as Constants from "../constants";
@@ -14,7 +15,7 @@ function TasksPage(props) {
     useEffect(() => {
         console.log(props.user)
         getTasks();
-    }, []);
+    }, [props.user]);
 
     useEffect(() => {
         if (tasks) {
