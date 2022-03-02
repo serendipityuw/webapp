@@ -1,11 +1,14 @@
 import { getAuth, signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { Navbar } from "reactstrap";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
 import * as Constants from '../constants';
+import "./Header.css"
 
 function Header(props) {
     const auth = getAuth();
     const navigate = useNavigate();
+    const [isOpen, setOpen] = useState(false);
 
     const handleSignOut = () => {
         signOut(auth);
@@ -13,31 +16,50 @@ function Header(props) {
     }
 
     const loggedInLinks = (
-        <div className="d-flex align-content-center flex-wrap justiy-content-end nav-links">
-            <a className="nav-link" href={Constants.HOME_PATH}>Home</a>
-            <a className="nav-link" href={Constants.TASKS_PATH}>Tasks</a>
-            <a className="nav-link" href={Constants.HISTORY_PATH}>History</a>
-            <a className="nav-link" href={Constants.ACCOUNT_PATH}>Account</a>
-            <a className="nav-link" onClick={handleSignOut} href={Constants.HOME_PATH} >Sign Out</a>
-        </div>
+        <>
+            <NavItem>
+                <NavLink href={Constants.HOME_PATH}>Home</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href={Constants.TASKS_PATH}>Tasks</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href={Constants.HISTORY_PATH}>History</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href={Constants.ACCOUNT_PATH}>Account</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink onClick={handleSignOut} href={Constants.HOME_PATH}>Sign Out</NavLink>
+            </NavItem>
+        </>
     );
 
     const loggedOutLinks = (
-        <div className="d-flex align-content-center flex-wrap justiy-content-end nav-links">
-            <a className="nav-link" href={Constants.HOME_PATH}>Home</a>
-            <a className="nav-link" href={Constants.SIGNIN_PATH}>Sign In</a>
-        </div>
+        <>
+            <NavItem>
+                <NavLink href={Constants.HOME_PATH}>Home</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink href={Constants.SIGNIN_PATH}>Sign In</NavLink>
+            </NavItem>
+        </>
     );
+
+    const toggle = () => {
+        setOpen(!isOpen);
+    }
 
     return (
         <header>
-            <Navbar>
-                <div className="container">
-                    <div className="d-flex flex-row align-items-center justify-content-start">
-                        <Link to={Constants.HOME_PATH} className="home">{Constants.APP_NAME}</Link>
-                    </div>
-                    {(auth.currentUser) ? loggedInLinks : loggedOutLinks}
-                </div>
+            <Navbar container color="dark" dark expand="sm">
+                <NavbarBrand className="home" href={Constants.HOME_PATH}>{Constants.APP_NAME}</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav navbar>
+                        {(auth.currentUser) ? loggedInLinks : loggedOutLinks}
+                    </Nav>
+                </Collapse>
             </Navbar>
         </header>
     );
