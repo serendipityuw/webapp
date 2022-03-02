@@ -41,9 +41,9 @@ function AccountPage(props) {
     const handleSubmitForm = (event) => {
         event.preventDefault();
         setLoading(true);
-        console.log(event.target["highSchool"].value);
         const newUserData = userData;
         newUserData.highSchool = event.target["highSchool"].value;
+        newUserData.hours = event.target["hours"].value;
         setUserData(newUserData);
         updateUserData();
     };
@@ -79,6 +79,13 @@ function AccountPage(props) {
                     <Label for="userHighSchool" sm={2}>High School</Label>
                     <Col sm={10}>
                         <Input type="text" name="highSchool" id="userHighSchool" defaultValue={userData ? userData.highSchool: ""}/>
+                    </Col>
+                    </FormGroup>
+
+                    <FormGroup row>
+                    <Label for="userHours" sm={2}>Service Hour Goal (in hours)</Label>
+                    <Col sm={10}>
+                        <Input type="number" name="hours" id="userHours" defaultValue={userData ? userData.hours: ""}/>
                     </Col>
                     </FormGroup>
                     
