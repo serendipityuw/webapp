@@ -1,9 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { child, get, getDatabase, ref } from "firebase/database";
 import { useEffect, useState } from "react";
+import { Row } from "reactstrap";
 import * as Constants from "../constants";
 import CenterSpinner from "./CenterSpinner";
 import Task from "./Task";
+import "./TasksPage.css"
 
 function TasksPage(props) {
     const [loading, setLoading] = useState(false);
@@ -47,9 +49,9 @@ function TasksPage(props) {
     return (loading) ? <CenterSpinner /> : (
         <section id="tasks">
             <div className="container">
-                <div className="row">
+                <Row>
                     {cards}
-                </div>
+                </Row>
             </div>
         </section>
     )

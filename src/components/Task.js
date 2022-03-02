@@ -1,11 +1,12 @@
 import {
     Card, CardText, CardBody,
-    CardTitle, Button
+    CardTitle, Button, Col
 } from 'reactstrap';
+import "./Task.css";
 
 function Task(props) {
     return (
-        <div className="col-md-6 col-lg-4 d-flex">
+        <Col sm={12} md={6}>
             <Card className="task-card">
                 <CardBody>
                     <div className="row">
@@ -13,13 +14,15 @@ function Task(props) {
                             <CardTitle tag="h2">{props.task.name}</CardTitle>
                             <CardText>
                                 {props.task.description}
+                                <br/>
+                                Task Hours: {props.task.hours}
                             </CardText>
                             <Button color="warning">Claim</Button>
                         </div>
                     </div>
                 </CardBody>
             </Card>
-        </div>
+        </Col>
     )
 }
 
