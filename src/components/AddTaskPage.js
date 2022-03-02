@@ -1,11 +1,34 @@
+import { getDatabase, push, ref, set } from "firebase/database";
+import { useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import "./AddTaskPage.css";
+import * as Constants from "../constants";
+import CenterSpinner from "./CenterSpinner";
 
 function AddTaskPage(props) {
-    return (
+    const [task, setTask] = useState({});
+    const [loading, setLoading] = useState(false);
+    const database = getDatabase();
+    const tasksRef = ref(database, Constants.TASKS_ENDPOINT);
+    
+    
+    const handleAddTask = (event) => {
+        const newTaskRef = push(tasksRef);
+        event.preventDefault();
+        setLoading(true);
+        const newTask = {};
+        newTask.name = event.target["name"].value;
+        newTask.description = event.target["description"].value;
+        newTask.hours = event.target["hours"].value;
+        set(newTaskRef, newTask).finally(() => {
+            setLoading(false);
+        });
+    }
+
+    return (loading) ? <CenterSpinner /> : (
         <section id="add-task">
             <div className="container">
-                <Form>
+                <Form onSubmit={handleAddTask}>
                     <FormGroup>
                         <Label for="taskName">Task Name</Label>
                         <Input required type="text" name="name" id="taskName" placeholder="Pick up prescription" />

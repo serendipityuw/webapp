@@ -43,7 +43,7 @@ function AccountPage(props) {
         const newUserData = userData;
         newUserData.highSchool = event.target["highSchool"].value;
         setUserData(newUserData);
-        updateUserData()
+        updateUserData();
     };
 
     
