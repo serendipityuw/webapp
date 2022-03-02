@@ -38,9 +38,6 @@ function Header(props) {
     const loggedOutLinks = (
         <>
             <NavItem>
-                <NavLink href={Constants.HOME_PATH}>Home</NavLink>
-            </NavItem>
-            <NavItem>
                 <NavLink href={Constants.SIGNIN_PATH}>Sign In</NavLink>
             </NavItem>
         </>
