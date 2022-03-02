@@ -2,7 +2,6 @@ import { getAuth, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "reactstrap";
 import * as Constants from '../constants';
-// import logo from "../img/icon.png";
 
 function Header(props) {
     const auth = getAuth();
@@ -23,6 +22,13 @@ function Header(props) {
         </div>
     );
 
+    const loggedOutLinks = (
+        <div className="d-flex align-content-center flex-wrap justiy-content-end nav-links">
+            <a className="nav-link" href={Constants.HOME_PATH}>Home</a>
+            <a className="nav-link" href={Constants.SIGNIN_PATH}>Sign In</a>
+        </div>
+    );
+
     return (
         <header>
             <Navbar>
@@ -30,7 +36,7 @@ function Header(props) {
                     <div className="d-flex flex-row align-items-center justify-content-start">
                         <Link to={Constants.HOME_PATH} className="home">{Constants.APP_NAME}</Link>
                     </div>
-                    {(auth.currentUser) ? loggedInLinks : null}
+                    {(auth.currentUser) ? loggedInLinks : loggedOutLinks}
                 </div>
             </Navbar>
         </header>

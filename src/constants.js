@@ -3,6 +3,7 @@ export const APP_TAGLINE = 'Helping the high school students build inter-generat
 
 export const HOME_PATH = "/";
 export const TASKS_PATH = "/tasks";
+export const ADD_TASK_PATH = "/add-task";
 export const HISTORY_PATH = "/history";
 export const ACCOUNT_PATH = "/account";
 export const SIGNIN_PATH = "/signin";

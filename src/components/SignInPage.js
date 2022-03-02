@@ -9,7 +9,6 @@ function SignInPage(props) {
             <div className="container">
                 <div className="d-flex flex-column justify-content-between align-items-center">
                     <h1 className="loginHeading">{Constants.APP_TAGLINE}</h1>
-
                     <SignInForm />
                     <Illustration />
                 </div>
