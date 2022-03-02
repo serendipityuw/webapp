@@ -56,9 +56,7 @@ function SignInForm() {
             });
         }).catch(error => {
             console.log(error.message);
-        });
-        
-       
+        });   
     }
 
     if (createAccount) {

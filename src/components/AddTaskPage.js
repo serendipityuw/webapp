@@ -6,7 +6,6 @@ import * as Constants from "../constants";
 import CenterSpinner from "./CenterSpinner";
 
 function AddTaskPage(props) {
-    const [task, setTask] = useState({});
     const [loading, setLoading] = useState(false);
     const database = getDatabase();
     const tasksRef = ref(database, Constants.TASKS_ENDPOINT);
