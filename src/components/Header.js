@@ -1,7 +1,7 @@
 import { getAuth, signOut } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Collapse, Container, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
 import * as Constants from '../constants';
 import "./Header.css"
 
@@ -53,7 +53,7 @@ function Header(props) {
     return (
         <header>
             <Navbar container color="dark" dark expand="sm">
-                <NavbarBrand className="home" href={Constants.HOME_PATH}>{Constants.APP_NAME}</NavbarBrand>
+                <NavbarBrand className="home-link" href={Constants.HOME_PATH}>{Constants.APP_NAME}</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav navbar>

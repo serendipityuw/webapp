@@ -1,13 +1,23 @@
-.navbar {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.nav-link {
+    margin: 0 8px;
+    font-weight: bold;
+    border-bottom: 5px solid white;
 }
 
-.home {
+.nav-link:hover {
+    color: var(--purple-primary) !important;
+    border-bottom: 5px solid var(--purple-primary);
+}
+
+.home-link {
     font-size: 28px !important;
     padding-left: 0;
     display: inline-block;
     font-weight: bold;
+}
+
+.home-link:hover {
+    color: var(--purple-primary) !important;
 }
 
 .icon {
