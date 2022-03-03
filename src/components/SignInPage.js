@@ -2,6 +2,7 @@ import './SignInPage.css';
 import SignInForm from './SignInForm';
 import Illustration from './Illustration';
 import * as Constants from '../constants';
+import SignUpForm from './SignUpForm';
 
 function SignInPage(props) {
     return (
@@ -9,7 +10,7 @@ function SignInPage(props) {
             <div className="container">
                 <div className="d-flex flex-column justify-content-between align-items-center">
                     <h1 className="loginHeading">{Constants.APP_TAGLINE}</h1>
-                    <SignInForm />
+                    {props.signup ? <SignUpForm /> : <SignInForm />}
                     <Illustration />
                 </div>
 

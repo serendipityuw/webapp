@@ -26,6 +26,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path={Constants.SIGNIN_PATH} element={ <SignInPage user={user} /> } />
+          <Route path={Constants.SIGNUP_PATH} element={ <SignInPage signup /> } />
           <Route path={Constants.HOME_PATH} element={ <HomePage user={user} /> } />
           <Route path={Constants.TASKS_PATH} element={ <RequireAuth user={user}><TasksPage user={user} /></RequireAuth> } />
           <Route path={Constants.HISTORY_PATH} element={ <RequireAuth user={user}><HistoryPage user={user} /></RequireAuth> } />
