@@ -14,3 +14,4 @@ export const USERS_ENDPOINT = "/users/";
 export const TASKS_ENDPOINT = "/tasks/";
 
 export const ACCOUNT_TYPES = ["Student", "Elder", "Faculty"];
+export const TASK_STATUSES = ["Unclaimed", "Claimed", "Completed"];

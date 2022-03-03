@@ -41,7 +41,7 @@ function TasksPage(props) {
     const createCards = (tasks) => {
         const newCards = [];
         for (const task_id in tasks) {
-            newCards.push( <Task key={task_id} task={tasks[task_id]} />)
+            newCards.push( <Task key={task_id} id={task_id} task={tasks[task_id]} />)
         }
         setCards(newCards);
     };

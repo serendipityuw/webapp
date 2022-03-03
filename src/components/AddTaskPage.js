@@ -20,6 +20,9 @@ function AddTaskPage(props) {
         newTask.name = event.target["name"].value;
         newTask.description = event.target["description"].value;
         newTask.hours = event.target["hours"].value;
+        newTask.category = event.target["category"].value;
+        newTask.timestamp = Date.now();
+        newTask.status = "Unclaimed";
         newTask.createdBy = auth.currentUser.displayName;
         set(newTaskRef, newTask).finally(() => {
             setLoading(false);
@@ -37,6 +40,16 @@ function AddTaskPage(props) {
                     <FormGroup>
                         <Label for="taskDescription">Task Description</Label>
                         <Input required type="textarea" name="description" id="taskDescription" placeholder="Brief description of task" />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for="categorySelect">Task Category</Label>
+                        <Input type="select" name="category" id="categorySelect">
+                            <option>Grocery</option>
+                            <option>Medication</option>
+                            <option>Companionship</option>
+                            <option>Household Chore</option>
+                            <option>Other</option>
+                    </Input>
                     </FormGroup>
                     <FormGroup>
                         <Label for="taskHours">Task Duration (in hours) </Label>
