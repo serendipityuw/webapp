@@ -1,5 +1,5 @@
 import { Button, Card, CardBody, Form, FormGroup, Label, Input, Col } from 'reactstrap';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import * as Constants from '../constants';
 import { getDatabase, ref, set } from 'firebase/database';
@@ -20,7 +20,9 @@ function SignUpForm() {
         if (userData.accountType !== "Elder") {
             userData.highSchool = form["highSchool"].value;
         }
-        set(ref(database, Constants.USERS_ENDPOINT + user.uid), userData).then(setLoading(false));
+
+        set(ref(database, Constants.USERS_ENDPOINT + user.uid), userData).then(updateProfile(user, {displayName: userData.name})).finally
+        (setLoading(false));
     }
 
     const handleCreateAccount = (event) => {

@@ -15,7 +15,7 @@ function Task(props) {
                     <CardText><span className='fieldName'>Estimated Hours: </span>{props.task.hours} Hours</CardText>
                     <Button className='claimButton'>Claim</Button>
                 </CardBody>
-                <CardFooter>Created By: <Badge tag="h5" className='creatorBadge'>John Doe</Badge></CardFooter>
+                <CardFooter>Created By: <Badge tag="h5" className='creatorBadge'>{props.task.createdBy}</Badge></CardFooter>
             </Card>
         </Col>
     )

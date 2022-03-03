@@ -4,12 +4,13 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import "./AddTaskPage.css";
 import * as Constants from "../constants";
 import CenterSpinner from "./CenterSpinner";
+import { getAuth } from "firebase/auth";
 
 function AddTaskPage(props) {
     const [loading, setLoading] = useState(false);
     const database = getDatabase();
+    const auth = getAuth();
     const tasksRef = ref(database, Constants.TASKS_ENDPOINT);
-    
     
     const handleAddTask = (event) => {
         const newTaskRef = push(tasksRef);
@@ -19,6 +20,7 @@ function AddTaskPage(props) {
         newTask.name = event.target["name"].value;
         newTask.description = event.target["description"].value;
         newTask.hours = event.target["hours"].value;
+        newTask.createdBy = auth.currentUser.displayName;
         set(newTaskRef, newTask).finally(() => {
             setLoading(false);
         });
