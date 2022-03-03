@@ -24,6 +24,10 @@ h3 {
   font-size: 1.45rem;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:focus {
+  background-color: var(--purple-primary);
+  border: none;
+}
 
 /* Medium */
 @media (min-width: 768px) {

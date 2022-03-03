@@ -12,3 +12,5 @@ export const SIGNUP_PATH = "/signup";
 export const BASE_URL = "https://serendipity-2f854-default-rtdb.firebaseio.com";
 export const USERS_ENDPOINT = "/users/";
 export const TASKS_ENDPOINT = "/tasks/";
+
+export const ACCOUNT_TYPES = ["Student", "Elder", "Faculty"];

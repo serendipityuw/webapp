@@ -2,13 +2,30 @@ import { Button, Card, CardBody, Form, FormGroup, Label, Input, Col } from 'reac
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import * as Constants from '../constants';
+import { getDatabase, ref, set } from 'firebase/database';
+import { useState } from 'react';
+import CenterSpinner from './CenterSpinner';
 
 function SignUpForm() {
     const auth = getAuth();
     const navigate = useNavigate();
+    const database = getDatabase();
+    const [loading, setLoading] = useState(false);
+
+    const setUserData = (form, user) => {
+        const userData = {};
+        userData.name = form["name"].value;
+        userData.email = form["email"].value;
+        userData.accountType = form["accountType"].value;
+        if (userData.accountType !== "Elder") {
+            userData.highSchool = form["highSchool"].value;
+        }
+        set(ref(database, Constants.USERS_ENDPOINT + user.uid), userData).then(setLoading(false));
+    }
 
     const handleCreateAccount = (event) => {
         event.preventDefault();
+        setLoading(true);
         const email = event.target["email"].value;
         const pass = event.target["password"].value;
         const confirmPass = event.target["confirmPassword"].value;
@@ -18,6 +35,7 @@ function SignUpForm() {
         } else {
             createUserWithEmailAndPassword(auth, email, pass).then(credentials => {
                 let user = credentials.user;
+                setUserData(event.target, user);
                 console.log(user);
                 navigate(Constants.HOME_PATH);
             })
@@ -26,12 +44,22 @@ function SignUpForm() {
             });
         }   
     }
+
+    const accountOptions = () => {
+        return Constants.ACCOUNT_TYPES.map((accountType) => {
+            return <option>{accountType}</option>
+        })
+    }
     
-    return (
+    return loading ? <CenterSpinner /> : (
         <Col md={6} sm={12}>
             <Card className="loginCard">
                 <CardBody>
                     <Form onSubmit={handleCreateAccount}>
+                        <FormGroup>
+                            <Label for="nameInput">Name</Label>
+                            <Input required type="text" name="name" id="nameInput" placeholder="Saatvik" />
+                        </FormGroup>
                         <FormGroup>
                             <Label for="emailInput">Email</Label>
                             <Input required type="email" name="email" id="emailInput" placeholder="saatvik@gmail.com" />
@@ -47,10 +75,12 @@ function SignUpForm() {
                         <FormGroup>
                             <Label for="accountType">Account Type</Label>
                             <Input type="select" name="accountType" id="accountType">
-                                <option>Student</option>
-                                <option>Elder</option>
-                                <option>Faculty</option>
+                                {accountOptions()}
                             </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="highSchool">High School</Label>
+                            <Input required type="text" name="highSchool" id="highSchool" placeholder="High School" />
                         </FormGroup>
                         <Button type="submit" className="mr-2" color="primary">Create Account</Button>
                     </Form>

@@ -48,8 +48,6 @@ function AccountPage(props) {
         updateUserData();
     };
 
-    
-
     return (loading) ? <CenterSpinner /> : (
         <section id="account">
             <div className="container">
