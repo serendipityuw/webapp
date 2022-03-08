@@ -7,7 +7,6 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState({});
-    const [taskData, setTaskData] = useState({});
     const auth = getAuth();
     const database = getDatabase();
 
@@ -40,7 +39,7 @@ export const AuthProvider = ({ children }) => {
                 setUserData({user: user});
             }
         });
-    }, []);
+    });
 
     return (
         <AuthContext.Provider value={ userData }>{ children }</AuthContext.Provider>

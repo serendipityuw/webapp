@@ -13,7 +13,7 @@ function HomePage() {
     useEffect(() => {
         if (tasks && data && data.tasks) {
             const newTasks = [];
-            data.tasks.map(task_id => {
+            data.tasks.forEach(task_id => {
                 if (tasks[task_id] && tasks[task_id].status === "Claimed") {
                     newTasks.push( <Task key={task_id} id={task_id} task={tasks[task_id]} />);
                 }

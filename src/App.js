@@ -8,19 +8,10 @@ import TasksPage from './pages/TasksPage';
 import HistoryPage from './pages/HistoryPage';
 import AccountPage from './pages/AccountPage';
 import * as Constants from './constants';
-import { useState } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import AddTaskPage from './pages/AddTaskPage';
 import { AuthProvider } from './context';
 
 function App() {
-  const auth = getAuth();
-  const [user, setUser] = useState(undefined);
-
-  onAuthStateChanged(auth, (user) => {
-    setUser(user);
-  });
-
   return (
     <AuthProvider>
       <BrowserRouter>
