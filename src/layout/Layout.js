@@ -23,7 +23,7 @@ function Layout() {
                 }
             }, 500)
         }
-    }, [user])
+    }, [user, location, navigate])
 
     return loading ? <CenterSpinner /> : (
         <div>
