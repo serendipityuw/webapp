@@ -1,4 +1,3 @@
-import { getAuth } from 'firebase/auth';
 import { child, get, getDatabase, ref, set } from 'firebase/database';
 import { useContext } from 'react';
 import {
