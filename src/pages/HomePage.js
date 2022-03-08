@@ -1,13 +1,15 @@
 import Intro from "../components/Intro";
 import 'firebase/database';
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../context";
 
 
-function HomePage(props) {
+function HomePage() {
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
-       console.log(props.user)
-    }, [props.user]);
+       console.log(user);
+    }, [user]);
 
 
     return (

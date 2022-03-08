@@ -10,28 +10,20 @@ export const AuthProvider = ({ children }) => {
     const auth = getAuth();
     const database = getDatabase();
 
-    const getAccountType = (user) => {
+    const getUserData = (user) => {
         return get(child(ref(database), `${Constants.USERS_ENDPOINT}${user.uid}`)).then((snapshot) => {
             if (snapshot.exists()) {
-                return snapshot.val().accountType
+                return snapshot.val();
             }
         }).catch((error) => {
             console.error(error);
-        });  
-    }
-
-    const getClaimedTasks = (user) => {
-        
-    }
-
-    const getCompletedTasks = (user) => {
-        
-    }
+        });
+    };
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                getAccountType(user).then(value => setUserData({...userData, user: user, accountType: value}))
+                getUserData(user).then(value => setUserData({user: user, data: value}));
             } else {
                 setUserData({user: user});
             }

@@ -7,8 +7,7 @@ import { AuthContext } from "../context";
 import "./Header.css"
 
 function Header() {
-    const { user, accountType } = useContext(AuthContext);
-    console.log(user);
+    const { data } = useContext(AuthContext);
     const auth = getAuth();
     const navigate = useNavigate();
     const [isOpen, setOpen] = useState(false);
@@ -77,7 +76,7 @@ function Header() {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav navbar>
-                        {!user ? loggedOutLinks : (accountType === "Elder" ? elderLinks : studentLinks)}
+                        {!data ? loggedOutLinks : (data.accountType === "Elder") ? elderLinks : studentLinks}
                     </Nav>
                 </Collapse>
             </Navbar>
