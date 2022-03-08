@@ -1,42 +1,21 @@
 import { getAuth, signOut } from "firebase/auth";
-import { child, get, getDatabase, ref } from "firebase/database";
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
 import * as Constants from '../constants';
+import { AuthContext } from "../context";
 import "./Header.css"
 
-function Header(props) {
+function Header() {
+    const { user, accountType } = useContext(AuthContext);
+    console.log(user);
     const auth = getAuth();
     const navigate = useNavigate();
-    const [accountType, setAccountType] = useState("");
     const [isOpen, setOpen] = useState(false);
-
-    const database = getDatabase();
 
     const handleSignOut = () => {
         signOut(auth);
         navigate(Constants.HOME_PATH);
-    }
-
-    useEffect(() => {
-        if (auth.currentUser) {
-            getAccountType(auth.currentUser).then((val) => {
-                setAccountType(val);
-            });
-        }
-    });
-
-    const getAccountType = (user) => {
-        return get(child(ref(database), `${Constants.USERS_ENDPOINT}${user.uid}`)).then((snapshot) => {
-            if (snapshot.exists()) {
-                return snapshot.val().accountType
-            }
-        }).catch((error) => {
-            console.error(error);
-        });
-
-        
     }
 
     const studentLinks = (
@@ -98,7 +77,7 @@ function Header(props) {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav navbar>
-                        {!auth.currentUser ? loggedOutLinks : (accountType === "Elder" ? elderLinks : studentLinks)}
+                        {!user ? loggedOutLinks : (accountType === "Elder" ? elderLinks : studentLinks)}
                     </Nav>
                 </Collapse>
             </Navbar>
