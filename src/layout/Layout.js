@@ -18,8 +18,8 @@ function Layout() {
         } else {
             setTimeout(() => {
                 if (!user) {
-                    setLoading(false);
                     navigate(Constants.SIGNIN_PATH, { state: { from: location }, replace: true });
+                    setLoading(false);
                 }
             }, 500)
         }
