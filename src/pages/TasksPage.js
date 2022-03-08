@@ -14,7 +14,7 @@ function TasksPage(props) {
             const newTasks = [];
             
             Object.keys(tasks).forEach(task_id => {
-                if (data.tasks.indexOf(task_id) === -1) {
+                if (data.tasks.indexOf(task_id) === -1 && tasks[task_id].status === "Unclaimed") {
                     newTasks.push( <Task key={task_id} id={task_id} task={tasks[task_id]} />);
                 }
             });
