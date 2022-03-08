@@ -1,22 +1,22 @@
 import { getAuth } from 'firebase/auth';
 import { child, get, getDatabase, ref, set } from 'firebase/database';
+import { useContext } from 'react';
 import {
     Card, CardText, CardBody,
     CardTitle, Button, Col, CardHeader, CardFooter, Badge
 } from 'reactstrap';
 import * as Constants from "../constants";
+import { AuthContext } from '../context';
 import "./Task.css";
 
 function Task(props) {
-    const auth = getAuth();
+    const { user } = useContext(AuthContext);
     const database = getDatabase();
 
     const handleClaimTask = (event) => {
-        const user_id = auth.currentUser.uid;
         const task_id = props.id;
-
         updateTaskStatus(task_id, "Claimed");
-        claimTask(user_id, task_id);
+        claimTask(user.uid, task_id);
     }
 
     const handleCompleteTask = (event) => {
@@ -27,6 +27,11 @@ function Task(props) {
         const taskRef = ref(database, Constants.TASKS_ENDPOINT + task_id);
         const newTask = props.task;
         newTask.status = status;
+        if (status === "Claimed") {
+            newTask.dateClaimed = Date.now();
+        } else if (status === "Completed") {
+            newTask.dateCompleted = Date.now();
+        }
         set(taskRef, newTask);
     }
 
@@ -46,7 +51,12 @@ function Task(props) {
                 <CardHeader><Badge>{props.task.category}</Badge></CardHeader>
                 <CardBody>
                     <CardTitle tag="h4">{props.task.name}</CardTitle>
-                    <CardText><span className='fieldName'>Date Created: </span>{new Date(props.task.timestamp).toLocaleString()}</CardText>
+                    { props.task.dateCreated ?
+                    <CardText><span className='fieldName'>Date Created: </span>{new Date(props.task.dateCreated).toLocaleString()}</CardText> : "" }
+                    { props.task.dateClaimed ?
+                    <CardText><span className='fieldName'>Date Claimed: </span>{new Date(props.task.dateClaimed).toLocaleString()}</CardText> : "" }
+                    { props.task.dateCompleted ?
+                    <CardText><span className='fieldName'>Date Completed: </span>{new Date(props.task.dateCompleted).toLocaleString()}</CardText> : "" }
                     <CardText><span className='fieldName'>Description: </span>{props.task.description}</CardText>
                     <CardText><span className='fieldName'>Estimated Hours: </span>{props.task.hours} Hours</CardText>
                     {props.task.status === "Unclaimed" ? <Button className='claimButton' onClick={handleClaimTask}>Claim</Button> : (props.task.status === "Claimed" ? <Button className='claimButton' onClick={handleCompleteTask}>Complete</Button> : "")}

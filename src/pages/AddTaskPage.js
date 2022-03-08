@@ -21,7 +21,9 @@ function AddTaskPage(props) {
         newTask.description = event.target["description"].value;
         newTask.hours = event.target["hours"].value;
         newTask.category = event.target["category"].value;
-        newTask.timestamp = Date.now();
+        newTask.dateCreated = Date.now();
+        newTask.dateClaimed = "";
+        newTask.dateCompleted = "";
         newTask.status = "Unclaimed";
         newTask.createdBy = auth.currentUser.displayName;
         set(newTaskRef, newTask).finally(() => {
