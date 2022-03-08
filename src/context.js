@@ -7,6 +7,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [userData, setUserData] = useState({});
+    const [taskData, setTaskData] = useState({});
     const auth = getAuth();
     const database = getDatabase();
 
@@ -20,10 +21,21 @@ export const AuthProvider = ({ children }) => {
         });
     };
 
+    const getTaskData = () => {
+        return get(child(ref(database), Constants.TASKS_ENDPOINT)).then(snapshot => {
+            if (snapshot.exists()) {
+                return snapshot.val();
+            }
+        }).catch(error => {
+            console.error(error);
+        });
+    }
+
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                getUserData(user).then(value => setUserData({user: user, data: value}));
+                
+                getUserData(user).then(data => getTaskData().then(tasks => setUserData({user: user, data: data, tasks: tasks})));
             } else {
                 setUserData({user: user});
             }
