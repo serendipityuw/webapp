@@ -49,7 +49,7 @@ function Task(props) {
                     <CardText><span className='fieldName'>Date Created: </span>{new Date(props.task.timestamp).toLocaleString()}</CardText>
                     <CardText><span className='fieldName'>Description: </span>{props.task.description}</CardText>
                     <CardText><span className='fieldName'>Estimated Hours: </span>{props.task.hours} Hours</CardText>
-                    {props.task.status === "Unclaimed" ? <Button className='claimButton' onClick={handleClaimTask}>Claim</Button> : <Button className='claimButton' onClick={handleCompleteTask}>Complete</Button>}
+                    {props.task.status === "Unclaimed" ? <Button className='claimButton' onClick={handleClaimTask}>Claim</Button> : (props.task.status === "Claimed" ? <Button className='claimButton' onClick={handleCompleteTask}>Complete</Button> : "")}
                 </CardBody>
                 <CardFooter>Created By: <Badge tag="h5" className='creatorBadge'>{props.task.createdBy}</Badge></CardFooter>
             </Card>

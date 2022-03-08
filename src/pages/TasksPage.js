@@ -9,44 +9,21 @@ import TasksGrid from "../components/TasksGrid";
 import { AuthContext } from "../context";
 
 function TasksPage(props) {
-    const [loading, setLoading] = useState(false);
-
-    const [tasks, setTasks] = useState([]);
     const [cards, setCards] = useState([]);
-    const { user } = useContext(AuthContext);
-    const database = getDatabase();
+    const { data, tasks } = useContext(AuthContext);
 
     useEffect(() => {
-        console.log(user)
-        getTasks();
-    }, [user]);
-
-    useEffect(() => {
-        if (tasks) {
-            createCards(tasks);
+        if (tasks && data && data.tasks) {
+            const newTasks = [];
+            
+            Object.keys(tasks).forEach(task_id => {
+                if (data.tasks.indexOf(task_id) === -1) {
+                    newTasks.push( <Task key={task_id} id={task_id} task={tasks[task_id]} />);
+                }
+            });
+            setCards(newTasks);
         }
-    }, [tasks])
-
-    const getTasks = () => {
-        setLoading(true);
-        get(child(ref(database), Constants.TASKS_ENDPOINT)).then((snapshot) => {
-            if (snapshot.exists()) {
-                setTasks(snapshot.val());
-            }
-        }).catch(error => {
-            console.error(error);
-        }).finally(() => {
-            setLoading(false);
-        });
-    };
-
-    const createCards = (tasks) => {
-        const newCards = [];
-        for (const task_id in tasks) {
-            newCards.push( <Task key={task_id} id={task_id} task={tasks[task_id]} />)
-        }
-        setCards(newCards);
-    };
+    }, [tasks, data]);
 
     return (
         <section className="tasks">
