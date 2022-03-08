@@ -26,8 +26,7 @@ function HomePage() {
     return (
         <div>
             <Intro />
-            <TasksGrid>
-            <h2>My Tasks</h2>
+            <TasksGrid heading="My Tasks">
             {currentTasks}
             </TasksGrid>
         </div>

@@ -21,8 +21,7 @@ function HistoryPage(props) {
 
     return (
         <div>
-            <TasksGrid>
-            <h2>Completed Tasks</h2>
+            <TasksGrid heading="Completed Tasks">
             {completeTasks}
             </TasksGrid>
         </div>

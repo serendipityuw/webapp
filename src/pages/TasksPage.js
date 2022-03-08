@@ -24,7 +24,7 @@ function TasksPage(props) {
 
     return (
         <section className="tasks">
-            <TasksGrid>
+            <TasksGrid heading="Available Tasks">
                 {cards}
             </TasksGrid>
         </section>
