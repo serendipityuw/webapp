@@ -33,10 +33,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                
                 getUserData(user).then(data => getTaskData().then(tasks => setUserData({user: user, data: data, tasks: tasks})));
-            } else {
-                setUserData({user: user});
             }
         });
     });
