@@ -1,4 +1,4 @@
-import Intro from "./Intro";
+import Intro from "../components/Intro";
 import 'firebase/database';
 import { useEffect } from "react";
 

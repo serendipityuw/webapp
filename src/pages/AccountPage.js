@@ -5,7 +5,7 @@ import { child, get, getDatabase, ref, set } from "firebase/database";
 import { useEffect, useState } from "react";
 import { Button, Col, Form, FormGroup, Input, Label } from "reactstrap";
 import * as Constants from "../constants";
-import CenterSpinner from "./CenterSpinner";
+import CenterSpinner from "../components/CenterSpinner";
 
 
 function AccountPage(props) {

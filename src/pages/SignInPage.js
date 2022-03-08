@@ -1,8 +1,8 @@
 import './SignInPage.css';
-import SignInForm from './SignInForm';
-import Illustration from './Illustration';
+import SignInForm from '../components/SignInForm';
+import Illustration from '../components/Illustration';
 import * as Constants from '../constants';
-import SignUpForm from './SignUpForm';
+import SignUpForm from '../components/SignUpForm';
 
 function SignInPage(props) {
     return (

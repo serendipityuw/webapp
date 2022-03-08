@@ -3,8 +3,8 @@ import { child, get, getDatabase, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { Row } from "reactstrap";
 import * as Constants from "../constants";
-import CenterSpinner from "./CenterSpinner";
-import Task from "./Task";
+import CenterSpinner from "../components/CenterSpinner";
+import Task from "../components/Task";
 import "./TasksPage.css"
 
 function TasksPage(props) {

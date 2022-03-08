@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import "./AddTaskPage.css";
 import * as Constants from "../constants";
-import CenterSpinner from "./CenterSpinner";
+import CenterSpinner from "../components/CenterSpinner";
 import { getAuth } from "firebase/auth";
 
 function AddTaskPage(props) {
