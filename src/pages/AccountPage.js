@@ -9,15 +9,14 @@ import CenterSpinner from "../components/CenterSpinner";
 import { AuthContext } from "../context";
 
 
-function AccountPage(props) {
+function AccountPage() {
     const { user, data } = useContext(AuthContext);
-    const [userData, setUserData] = useState(undefined);
+    const [userData, setUserData] = useState(data);
     const [loading, setLoading] = useState(false);
 
     const database = getDatabase();
 
     const updateUserData = () => {
-        console.log(userData);
         if (userData) {
             set(ref(database, Constants.USERS_ENDPOINT + user.uid), userData).finally(() => {
                 setLoading(false);
