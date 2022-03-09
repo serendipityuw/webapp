@@ -9,7 +9,7 @@ import { AuthContext } from '../context';
 import "./Task.css";
 
 function Task(props) {
-    const { user } = useContext(AuthContext);
+    const { user, data } = useContext(AuthContext);
     const database = getDatabase();
 
     const handleClaimTask = (event) => {
@@ -58,9 +58,10 @@ function Task(props) {
                     <CardText><span className='fieldName'>Date Completed: </span>{new Date(props.task.dateCompleted).toLocaleString()}</CardText> : "" }
                     <CardText><span className='fieldName'>Description: </span>{props.task.description}</CardText>
                     <CardText><span className='fieldName'>Estimated Hours: </span>{props.task.hours} Hours</CardText>
-                    {props.task.status === "Unclaimed" ? <Button className='claimButton' onClick={handleClaimTask}>Claim</Button> : (props.task.status === "Claimed" ? <Button className='claimButton' onClick={handleCompleteTask}>Complete</Button> : "")}
+                    {data.accountType === "Student" && props.task.status === "Unclaimed" ? <Button className='claimButton' onClick={handleClaimTask}>Claim</Button> : (data.accountType === "Student" && props.task.status === "Claimed" ? <Button className='claimButton' onClick={handleCompleteTask}>Complete</Button> : "")}
                 </CardBody>
-                <CardFooter>Created By: <Badge tag="h5" className='creatorBadge'>{props.task.createdBy}</Badge></CardFooter>
+                { data.accountType === "Student" ? (<CardFooter>Created By: <Badge tag="h5" className='creatorBadge'>{props.task.createdBy}</Badge></CardFooter>) : (<CardFooter>Task Status: <Badge tag="h5" className='creatorBadge'>{props.task.status}</Badge></CardFooter>) }
+                
             </Card>
         </Col>
     )

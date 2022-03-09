@@ -46,9 +46,6 @@ function Header() {
                 <NavLink href={Constants.ADD_TASK_PATH}>Add Task</NavLink>
             </NavItem>
             <NavItem>
-                <NavLink href={Constants.HISTORY_PATH}>History</NavLink>
-            </NavItem>
-            <NavItem>
                 <NavLink href={Constants.ACCOUNT_PATH}>Account</NavLink>
             </NavItem>
             <NavItem>

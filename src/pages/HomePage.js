@@ -13,10 +13,18 @@ function HomePage() {
     useEffect(() => {
         if (tasks && data && data.tasks) {
             const newTasks = [];
+            const { accountType } = data;
             data.tasks.forEach(task_id => {
-                if (tasks[task_id] && tasks[task_id].status === "Claimed") {
-                    newTasks.push( <Task key={task_id} id={task_id} task={tasks[task_id]} />);
+                if (accountType === "Student") {
+                    if (tasks[task_id] && tasks[task_id].status === "Claimed") {
+                        newTasks.push( <Task key={task_id} id={task_id} task={tasks[task_id]} />);
+                    }
+                } else if (accountType === "Elder") {
+                    if (tasks[task_id]) {
+                        newTasks.push( <Task key={task_id} id={task_id} task={tasks[task_id]} />);
+                    }
                 }
+                
             });
             setCurrentTasks(newTasks);
         }
