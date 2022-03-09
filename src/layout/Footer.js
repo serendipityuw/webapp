@@ -4,7 +4,7 @@ function Footer() {
     return (
         <footer>
             <div className="container">
-                <p>&copy; 2022 {Constants.APP_NAME}. All Rights Reserved.</p>
+                <p>{Constants.APP_NAME}</p>
             </div>
         </footer>
     );
