@@ -1,15 +1,15 @@
-import { getDatabase, push, ref, set } from "firebase/database";
-import { useState } from "react";
+import { child, get, getDatabase, push, ref, set } from "firebase/database";
+import { useContext, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import "./AddTaskPage.css";
 import * as Constants from "../constants";
 import CenterSpinner from "../components/CenterSpinner";
-import { getAuth } from "firebase/auth";
+import { AuthContext } from "../context";
 
 function AddTaskPage(props) {
     const [loading, setLoading] = useState(false);
     const database = getDatabase();
-    const auth = getAuth();
+    const { user } = useContext(AuthContext);
     const tasksRef = ref(database, Constants.TASKS_ENDPOINT);
     
     const handleAddTask = (event) => {
@@ -25,8 +25,14 @@ function AddTaskPage(props) {
         newTask.dateClaimed = "";
         newTask.dateCompleted = "";
         newTask.status = "Unclaimed";
-        newTask.createdBy = auth.currentUser.displayName;
-        set(newTaskRef, newTask).finally(() => {
+        newTask.createdBy = user.displayName;
+        set(newTaskRef, newTask).then(() => {
+            get(child(ref(database), Constants.USERS_ENDPOINT + user.uid + "/tasks")).then(snapshot => {
+                const tasks = snapshot.val() ? snapshot.val() : [];
+                tasks.push(newTaskRef.key);
+                set(child(ref(database), Constants.USERS_ENDPOINT + user.uid + "/tasks"), tasks);                    
+            })
+        }).finally(() => {
             setLoading(false);
         });
     }
