@@ -9,7 +9,7 @@
 
 [React](https://reactjs.org/) (Application)
 
-***Notice for users and stakeholders: Serendipity will be shut down on May 21, 2022***
+***Notice for users and stakeholders: Serendipity will be shut down on May 26, 2022***
 
 The project organization on github will be deleted along with the codebase
 
