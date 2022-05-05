@@ -1,4 +1,33 @@
-# Getting Started with Create React App
+# Serendipity
+<img src="src/img/undraw_grandma.svg" alt="Serendipity" style="width: 256px; height: 256px" />
+
+## Tech Stack
+
+[Firebase](https://firebase.google.com/) (Backend)
+
+[Netlify](app.netlify.com) (Hosting)
+
+[React](https://reactjs.org/) (Application)
+
+## Setting up the Application
+
+Fork the repo
+
+Create a project on firebase
+
+Link the forked repo to netlify
+
+Run `npm i`
+
+Update `src/config.js` with firebase web app config. See [firebase web setup](https://firebase.google.com/docs/web/setup) for more info
+
+Run `yarn start` to run the webapp locally
+
+## Deploying 
+
+Once you have linked your netlify account the forked repo, netlify will deploy whenever a new commit is pushed to the `main` branch
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
