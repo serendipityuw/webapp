@@ -29,6 +29,7 @@ function AccountPage() {
         setLoading(true);
         const newUserData = userData;
         newUserData.phoneNumber = event.target["phoneNumber"] ? event.target["phoneNumber"].value : null;
+        newUserData.address = event.target["address"] ? event.target["address"].value : null;
         newUserData.highSchool = event.target["highSchool"] ? event.target["highSchool"].value : null;
         newUserData.hoursGoal = event.target["hoursGoal"] ? event.target["hoursGoal"].value : null;
         setUserData(newUserData);
@@ -70,7 +71,7 @@ function AccountPage() {
                     <FormGroup row>
                         <Label for="address" sm={2}>Address</Label>
                         <Col sm={10}>
-                            <Input type="text" name="address" id="address" defaultValue={data && data.address ? data.address: ""} placeholder="4001 E Stevens Way NE, Seattle, WA 98195"/>
+                            <Input type="text" name="address" id="address" defaultValue={data && data.address ? data.address : ""} placeholder="4001 E Stevens Way NE, Seattle, WA 98195"/>
                         </Col>
                     </FormGroup>
                     

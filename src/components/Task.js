@@ -80,11 +80,11 @@ function Task(props) {
                     {data && 
                     props.task.status === "Claimed" && 
                     data.accountType === "Student" && 
-                    elder.phoneNumber ? <CardText><span className='fieldName'>Phone Number: { elder.phoneNumber }</span></CardText> : ""}
+                    elder.phoneNumber ? <CardText><span className='fieldName'>Phone Number: </span><span>{ elder.phoneNumber }</span></CardText> : ""}
                     {data && 
                     props.task.status === "Claimed" &&
                     data.accountType === "Student" && 
-                    elder.address ? <CardText><span className='fieldName'>Address: { elder.address }</span></CardText> : ""}
+                    elder.address ? <CardText><span className='fieldName'>Address: </span><span>{ elder.address }</span></CardText> : ""}
                     {data && 
                     data.accountType === "Student" && 
                     props.task.status === "Unclaimed" ? <Button className='claimButton' onClick={handleClaimTask}>Claim</Button> : (data.accountType === "Student" && props.task.status === "Claimed" ? <Button className='claimButton' onClick={handleCompleteTask}>Complete</Button> : "")}
