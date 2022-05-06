@@ -28,8 +28,9 @@ function AccountPage() {
         event.preventDefault();
         setLoading(true);
         const newUserData = userData;
-        newUserData.highSchool = event.target["highSchool"].value;
-        newUserData.hours = event.target["hours"].value;
+        newUserData.phoneNumber = event.target["phoneNumber"] ? event.target["phoneNumber"].value : '';
+        newUserData.highSchool = event.target["highSchool"] ? event.target["highSchool"].value : '';
+        newUserData.hours = event.target["hours"] ? event.target["hours"].value : '';
         setUserData(newUserData);
         updateUserData();
     };
@@ -58,20 +59,38 @@ function AccountPage() {
                         <Input type="text" name="accountType" id="accountType" readOnly value={data ? data.accountType: ""}/>
                     </Col>
                     </FormGroup>
-
+                    
                     <FormGroup row>
-                    <Label for="userHighSchool" sm={2}>High School</Label>
-                    <Col sm={10}>
-                        <Input type="text" name="highSchool" id="userHighSchool" defaultValue={data ? data.highSchool: ""}/>
-                    </Col>
+                        <Label for="phoneNumber" sm={2}>Phone Number</Label>
+                        <Col sm={10}>
+                            <Input type="tel" name="phoneNumber" id="phoneNumber" defaultValue={data && data.phoneNumber ? data.phoneNumber: ""} placeholder="206-123-4567"/>
+                        </Col>
                     </FormGroup>
 
                     <FormGroup row>
-                    <Label for="userHours" sm={2}>Service Hour Goal (in hours)</Label>
-                    <Col sm={10}>
-                        <Input type="number" name="hours" id="userHours" defaultValue={data ? data.hours: ""}/>
-                    </Col>
+                        <Label for="address" sm={2}>Address</Label>
+                        <Col sm={10}>
+                            <Input type="text" name="address" id="address" defaultValue={data && data.address ? data.address: ""} placeholder="4001 E Stevens Way NE, Seattle, WA 98195"/>
+                        </Col>
                     </FormGroup>
+                    
+                    {data.accountType === "Elder" ? '' :
+                        <FormGroup row>
+                        <Label for="userHighSchool" sm={2}>High School</Label>
+                        <Col sm={10}>
+                            <Input type="text" name="highSchool" id="userHighSchool" defaultValue={data ? data.highSchool: ""}/>
+                        </Col>
+                        </FormGroup>
+                    }
+
+                    {data.accountType === "Elder" ? '' :
+                        <FormGroup row>
+                        <Label for="userHours" sm={2}>Service Hour Goal (in hours)</Label>
+                        <Col sm={10}>
+                            <Input type="number" name="hours" id="userHours" defaultValue={data ? data.hours: ""}/>
+                        </Col>
+                        </FormGroup>
+                    }
                     
                     <FormGroup check row>
                     <Col sm={{ size: 10, offset: 2 }}>

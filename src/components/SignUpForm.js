@@ -81,8 +81,8 @@ function SignUpForm() {
                             </Input>
                         </FormGroup>
                         <FormGroup>
-                            <Label for="highSchool">High School</Label>
-                            <Input required type="text" name="highSchool" id="highSchool" placeholder="High School" />
+                            <Label for="highSchool">High School (for students/faculty only)</Label>
+                            <Input type="text" name="highSchool" id="highSchool" placeholder="High School" />
                         </FormGroup>
                         <Button type="submit" className="mr-2" color="primary">Create Account</Button>
                     </Form>
