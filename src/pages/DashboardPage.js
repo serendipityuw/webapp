@@ -46,6 +46,9 @@ function DashboardPage() {
                     { student.name }
                 </td>
                 <td>
+                    { student.email }
+                </td>
+                <td>
                     { student.hoursGoal || 0 }
                 </td>
                 <td>
@@ -67,6 +70,9 @@ function DashboardPage() {
                     </th>
                     <th>
                         Student Name
+                    </th>
+                    <th>
+                        Student Email
                     </th>
                     <th>
                         Goal Hours
