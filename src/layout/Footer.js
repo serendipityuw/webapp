@@ -1,23 +1,36 @@
-import { Button, Container, Progress, Toast, ToastBody, ToastHeader } from 'reactstrap';
+import { useContext } from 'react';
+import { Alert, Button, Container, Progress, Toast, ToastBody, ToastHeader } from 'reactstrap';
+import { AuthContext } from '../context';
 import './Footer.css';
 
 function Footer() {
+    const { data } = useContext(AuthContext);
+    // const notifications = [{heading: "Serendipity", body: "Hello, world! This is a toast message."}]
+    const notifications = []
+
+
     return (
         <footer>
             <Container fluid className="notifications">
-                {/* <Toast className="notification-item">
-                    <ToastHeader close={ <Button close /> }>
-                        <strong className="ml-auto">Bootstrap</strong>
-                        <small>11 mins ago</small>
-                    </ToastHeader>
-                    <ToastBody>Hello, world! This is a toast message.</ToastBody>
-                </Toast> */}
+                {notifications.map(notification => {
+                    return <Toast className="notification-item">
+                        <ToastHeader close={ <Button close /> }>
+                            <strong className="ml-auto">{ notification.heading  }</strong>
+                        </ToastHeader>
+                        <ToastBody>{ notification.body }</ToastBody>
+                    </Toast>
+                })}
+                
             </Container>
 
-            <Container className="progressContainer">
-                <p>Service Hours Progress</p>
-                <Progress min={ 0 } max={ 30 } value={ 5 } />
-            </Container>
+            {data && data.accountType === "Student" ? 
+                <Container className="progressContainer">
+                    <p>Service Hours Progress</p>
+                    { data.hoursGoal ? <Progress min={ 0 } max={ data.hoursGoal } value={ data.hoursCompleted || 0 } /> : <Alert color="primary">Set a Service Hours Goal in <a href='/account'>Account</a> page </Alert> } 
+                    
+                </Container> : ""
+            }
+            
         </footer>
     );
 }

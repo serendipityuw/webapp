@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context";
 import TasksGrid from "../components/TasksGrid";
 import Task from "../components/Task";
+import { Alert } from "reactstrap";
 
 
 function HomePage() {
@@ -35,7 +36,7 @@ function HomePage() {
         <div>
             <Intro />
             <TasksGrid heading="My Tasks">
-            {currentTasks}
+            {currentTasks.length === 0 ? <Alert color="primary">You don't have any claimed tasks. Claim a task from <a href="/tasks">Tasks</a> page</Alert> : currentTasks}
             </TasksGrid>
         </div>
     );

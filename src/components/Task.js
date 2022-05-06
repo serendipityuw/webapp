@@ -18,8 +18,15 @@ function Task(props) {
         claimTask(user.uid, task_id);
     }
 
-    const handleCompleteTask = (event) => {
+    const updateHours = () => {
+        const newData = data;
+        newData.hoursCompleted = data.hoursCompleted ? parseInt(data.hoursCompleted) + 1 : props.task.hours;
+        set(ref(database, Constants.USERS_ENDPOINT + user.uid), newData);
+    }
+
+    const handleCompleteTask = () => {
         updateTaskStatus(props.id, "Completed");
+        updateHours()
     }
 
     const updateTaskStatus = (task_id, status) => {

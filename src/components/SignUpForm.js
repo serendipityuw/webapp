@@ -20,6 +20,9 @@ function SignUpForm() {
         if (userData.accountType !== "Elder") {
             userData.highSchool = form["highSchool"].value;
         }
+        if (userData.accountType !== "Student") {
+            userData.hoursCompleted =  0;
+        }
 
         set(ref(database, Constants.USERS_ENDPOINT + user.uid), userData).then(updateProfile(user, {displayName: userData.name})).finally
         (setLoading(false));

@@ -28,9 +28,9 @@ function AccountPage() {
         event.preventDefault();
         setLoading(true);
         const newUserData = userData;
-        newUserData.phoneNumber = event.target["phoneNumber"] ? event.target["phoneNumber"].value : '';
-        newUserData.highSchool = event.target["highSchool"] ? event.target["highSchool"].value : '';
-        newUserData.hours = event.target["hours"] ? event.target["hours"].value : '';
+        newUserData.phoneNumber = event.target["phoneNumber"] ? event.target["phoneNumber"].value : null;
+        newUserData.highSchool = event.target["highSchool"] ? event.target["highSchool"].value : null;
+        newUserData.hoursGoal = event.target["hoursGoal"] ? event.target["hoursGoal"].value : null;
         setUserData(newUserData);
         updateUserData();
     };
@@ -87,7 +87,7 @@ function AccountPage() {
                         <FormGroup row>
                         <Label for="userHours" sm={2}>Service Hour Goal (in hours)</Label>
                         <Col sm={10}>
-                            <Input type="number" name="hours" id="userHours" defaultValue={data ? data.hours: ""}/>
+                            <Input type="number" name="hoursGoal" id="hoursGoal" defaultValue={data ? data.hoursGoal: ""}/>
                         </Col>
                         </FormGroup>
                     }
