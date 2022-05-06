@@ -21,7 +21,7 @@ function Layout() {
                     navigate(Constants.SIGNIN_PATH, { state: { from: location }, replace: true });
                     setLoading(false);
                 }
-            }, 500)
+            }, 1000)
         }
     }, [user, location, navigate])
 
