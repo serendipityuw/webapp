@@ -4,14 +4,20 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context";
 import TasksGrid from "../components/TasksGrid";
 import Task from "../components/Task";
+import * as Constants from "../constants";
 import { Alert } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 
 function HomePage() {
     const { data, tasks } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [currentTasks, setCurrentTasks] = useState([]);
 
     useEffect(() => {
+        if (data && data.accountType === "Faculty") {
+            navigate(Constants.DASHBOARD_PATH)
+        }
         if (tasks && data && data.tasks) {
             const newTasks = [];
             const { accountType } = data;

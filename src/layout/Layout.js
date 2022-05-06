@@ -7,12 +7,15 @@ import CenterSpinner from '../components/CenterSpinner';
 import * as Constants from "../constants";
 
 function Layout() {
-    const { user } = useContext(AuthContext);
+    const { user, data } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const location = useLocation();
 
     useEffect(() => {
+        if (data && data.accountType === 'Faculty') {
+            setLoading(false);
+        }
         if (user) {
             setLoading(false);
         } else {
@@ -23,7 +26,7 @@ function Layout() {
                 }
             }, 1000)
         }
-    }, [user, location, navigate])
+    }, [user, location, navigate, data])
 
     return loading ? <CenterSpinner /> : (
         <div>

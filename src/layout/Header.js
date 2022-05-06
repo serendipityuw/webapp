@@ -54,6 +54,17 @@ function Header() {
         </>
     );
 
+    const facultyLinks = (
+        <>
+            <NavItem>
+                <NavLink href={Constants.SIGNUP_PATH}>Create Account</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink onClick={handleSignOut} href={Constants.HOME_PATH}>Sign Out</NavLink>
+            </NavItem>
+        </>
+    )
+
     const loggedOutLinks = (
         <>
             <NavItem>
@@ -73,7 +84,10 @@ function Header() {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav navbar>
-                        {!data ? loggedOutLinks : (data.accountType === "Elder") ? elderLinks : studentLinks}
+                        {data && data.accountType === "Elder" ? elderLinks : ''}
+                        {data && data.accountType === "Student" ? studentLinks : ''}
+                        {data && data.accountType === "Faculty" ? facultyLinks : ''}
+                        {!data ? loggedOutLinks : ''}
                     </Nav>
                 </Collapse>
             </Navbar>

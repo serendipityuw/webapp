@@ -8,6 +8,8 @@ export const HISTORY_PATH = "/history";
 export const ACCOUNT_PATH = "/account";
 export const SIGNIN_PATH = "/signin";
 export const SIGNUP_PATH = "/signup";
+export const DASHBOARD_PATH = "/dashboard";
+
 
 export const BASE_URL = "https://serendipity-2f854-default-rtdb.firebaseio.com";
 export const USERS_ENDPOINT = "/users/";

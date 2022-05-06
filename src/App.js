@@ -7,6 +7,7 @@ import Layout from './layout/Layout';
 import TasksPage from './pages/TasksPage';
 import HistoryPage from './pages/HistoryPage';
 import AccountPage from './pages/AccountPage';
+import DashboardPage from './pages/DashboardPage';
 import * as Constants from './constants';
 import AddTaskPage from './pages/AddTaskPage';
 import { AuthProvider } from './context';
@@ -24,6 +25,7 @@ function App() {
             <Route path={Constants.HISTORY_PATH} element={ <HistoryPage /> } />
             <Route path={Constants.ACCOUNT_PATH} element={ <AccountPage /> } />
             <Route path={Constants.ADD_TASK_PATH} element={ <AddTaskPage /> } />
+            <Route path={Constants.DASHBOARD_PATH} element={ <DashboardPage /> } />
           </Route>
         </Routes>
       </BrowserRouter>
