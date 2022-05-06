@@ -1,6 +1,8 @@
 # Serendipity
 <img src="src/img/undraw_grandma.svg" alt="Serendipity" style="width: 256px; height: 256px" />
 
+## [Demo](https://www.youtube.com/watch?v=XJAXYoQ88Qo)
+
 ## Tech Stack
 
 [Firebase](https://firebase.google.com/) (Backend)
@@ -16,3 +18,5 @@ The project organization on github will be deleted along with the codebase
 Firebase project will be deleted along with the collected data
 
 Netlify project will be unlinked and deleted
+
+
