@@ -25,7 +25,7 @@ function AddTaskPage(props) {
         newTask.dateClaimed = "";
         newTask.dateCompleted = "";
         newTask.status = "Unclaimed";
-        newTask.createdBy = user.displayName;
+        newTask.createdBy = user.uid;
         set(newTaskRef, newTask).then(() => {
             get(child(ref(database), Constants.USERS_ENDPOINT + user.uid + "/tasks")).then(snapshot => {
                 const tasks = snapshot.val() ? snapshot.val() : [];

@@ -1,5 +1,5 @@
 import { child, get, getDatabase, ref, set } from 'firebase/database';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
     Card, CardText, CardBody,
     CardTitle, Button, Col, CardHeader, CardFooter, Badge
@@ -10,7 +10,18 @@ import "./Task.css";
 
 function Task(props) {
     const { user, data } = useContext(AuthContext);
+    const [elder, setElder] = useState({});
     const database = getDatabase();
+
+    const getElderData = (user_id) => {
+        return get(child(ref(database), `${Constants.USERS_ENDPOINT}${user_id}`)).then((snapshot) => {
+            if (snapshot.exists()) {
+                return snapshot.val();
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
+    };
 
     const handleClaimTask = (event) => {
         const task_id = props.id;
@@ -51,23 +62,34 @@ function Task(props) {
         })
     }
 
+    useEffect(() => {
+        getElderData(props.task.createdBy).then(userData => {
+            setElder(userData)
+        })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.task]);
+
     return (
         <Col sm={12} md={6}>
             <Card className="task-card">
                 <CardHeader><Badge>{props.task.category}</Badge></CardHeader>
                 <CardBody>
-                    <CardTitle tag="h4">{props.task.name}</CardTitle>
-                    { props.task.dateCreated ?
-                    <CardText><span className='fieldName'>Date Created: </span>{new Date(props.task.dateCreated).toLocaleString()}</CardText> : "" }
-                    { props.task.dateClaimed ?
-                    <CardText><span className='fieldName'>Date Claimed: </span>{new Date(props.task.dateClaimed).toLocaleString()}</CardText> : "" }
-                    { props.task.dateCompleted ?
-                    <CardText><span className='fieldName'>Date Completed: </span>{new Date(props.task.dateCompleted).toLocaleString()}</CardText> : "" }
+                    <CardTitle tag="h4">{props.task.name}</CardTitle>        
                     <CardText><span className='fieldName'>Description: </span>{props.task.description}</CardText>
                     <CardText><span className='fieldName'>Estimated Hours: </span>{props.task.hours} Hours</CardText>
-                    {data.accountType === "Student" && props.task.status === "Unclaimed" ? <Button className='claimButton' onClick={handleClaimTask}>Claim</Button> : (data.accountType === "Student" && props.task.status === "Claimed" ? <Button className='claimButton' onClick={handleCompleteTask}>Complete</Button> : "")}
+                    {data && 
+                    props.task.status === "Claimed" && 
+                    data.accountType === "Student" && 
+                    elder.phoneNumber ? <CardText><span className='fieldName'>Phone Number: { elder.phoneNumber }</span></CardText> : ""}
+                    {data && 
+                    props.task.status === "Claimed" &&
+                    data.accountType === "Student" && 
+                    elder.address ? <CardText><span className='fieldName'>Address: { elder.address }</span></CardText> : ""}
+                    {data && 
+                    data.accountType === "Student" && 
+                    props.task.status === "Unclaimed" ? <Button className='claimButton' onClick={handleClaimTask}>Claim</Button> : (data.accountType === "Student" && props.task.status === "Claimed" ? <Button className='claimButton' onClick={handleCompleteTask}>Complete</Button> : "")}
                 </CardBody>
-                { data.accountType === "Student" ? (<CardFooter>Created By: <Badge tag="h5" className='creatorBadge'>{props.task.createdBy}</Badge></CardFooter>) : (<CardFooter>Task Status: <Badge tag="h5" className='creatorBadge'>{props.task.status}</Badge></CardFooter>) }
+                { data.accountType === "Student" ? (<CardFooter>Created By: <Badge tag="h5" className='creatorBadge'>{ elder.name }</Badge></CardFooter>) : (<CardFooter>Task Status: <Badge tag="h5" className='creatorBadge'>{props.task.status}</Badge></CardFooter>) }
                 
             </Card>
         </Col>
