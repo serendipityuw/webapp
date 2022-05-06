@@ -35,6 +35,7 @@ function HomePage() {
             });
             setCurrentTasks(newTasks);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tasks, data]);
 
 
