@@ -31,7 +31,7 @@ function Task(props) {
 
     const updateHours = () => {
         const newData = data;
-        newData.hoursCompleted = data.hoursCompleted ? parseInt(data.hoursCompleted) + props.task.hours : props.task.hours;
+        newData.hoursCompleted = data.hoursCompleted ? parseInt(data.hoursCompleted) + parseInt(props.task.hours) : parseInt(props.task.hours);
         set(ref(database, Constants.USERS_ENDPOINT + user.uid), newData);
     }
 
