@@ -1,4 +1,7 @@
 # Serendipity
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6d16efda-0b36-4556-b155-ad3d7ee06ea3/deploy-status)](https://app.netlify.com/sites/serendipity-uw/deploys)
+
 <img src="src/img/undraw_grandma.svg" alt="Serendipity" style="width: 256px; height: 256px" />
 
 ## [Demo](https://www.youtube.com/watch?v=XJAXYoQ88Qo)
