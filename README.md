@@ -19,15 +19,3 @@ The project organization on github will be deleted along with the codebase
 Firebase project will be deleted along with the collected data
 
 Netlify project will be unlinked and deleted
-
-## Screenshots
-
-![Student Home Page](./screenshots/studentHomePage.png)
-
-![Student Account Page](./screenshots/studentAccountPage.png)
-
-![Elder Home Page](./screenshots/elderHomePage.png)
-
-![Elder Account Page](./screenshots/elderAccountPage.png)
-
-![Elder Add Task Page](./screenshots/elderAddTask.png)
